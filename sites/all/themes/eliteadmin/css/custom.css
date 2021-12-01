@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext);
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+.white-box .box-title {
+    font-size: 25px;
+}
+#side-menu > li > a:focus, #side-menu > li > a:hover {
+    color: #000 !important;
+    background-color: #eee !important;
+}
+.panel-default .panel-body, .panel-white .panel-body {
+    color: #000;
+    font-size: 17px;
+}
+
+#user-login .form-text {
+    width: 100%
+}
+.question-box {
+    border: 1px solid #005983;
+    border-radius: 2px;
+    padding: 5px;
+    margin-bottom: 10px
+}
+.mcc-timeline .timeline {
+    margin: 0;
+}
+.mcc-timeline .timeline>li>.timeline-panel {
+    width: 45%;
+}
+div.subjects-name div.form-checkboxes {
+    -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+}
+a.send-mass-email {
+    margin-bottom: 10px;
+    display: inline-block
+}
+a.send-mass-email,
+.user-email-box,
+.user-email-box .mail-sending {
+    display: none;
+}
+.second-level li a {
+    background: #f7fafc !important;
+    color: #000000 !important;
+}
+
+.page-syllabus .views-table, .page-syllabus .sticky-table, .page-basic-webmail .views-table, .page-basic-webmail .sticky-table {
+    width: 100%;
+    background: #fff;
+}
+.page-syllabus .views-table tr {
+    border-bottom: 1px solid #ccc;
+}
+.page-syllabus .views-table tr th, .page-syllabus .sticky-table tr th, .page-syllabus .views-table tr td, .page-syllabus .sticky-table tr td {
+    padding: 10px;
+}
+.page-syllabus .views-table tr {
+    border-bottom: 1px solid #ccc;
+}

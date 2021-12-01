@@ -1,0 +1,10 @@
+name = MCC Common
+description = Module to implement common task all over the projects
+package = Mcc
+version = VERSION
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2015-06-17
+version = "7.1"
+project = ""
+datestamp = "1434567286"

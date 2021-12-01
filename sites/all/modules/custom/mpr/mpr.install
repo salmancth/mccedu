@@ -1,0 +1,48 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function mpr_schema() {
+  $schema = array();
+
+  $schema['mcc_personal_report'] = array(
+    'description' => 'MCC Personal Report.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary Key: Identifier for a report.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'quran_daily' => array(
+        'description' => 'Quran',
+        'type' => 'int',
+        'length' => 1,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'hadith_daily' => array(
+        'description' => 'Hadith',
+        'type' => 'int',
+        'length' => 1,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'report_date' => array(
+        'description' => 'The Unix timestamp for report date.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the model was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

@@ -1,0 +1,1 @@
+<?php print drupal_render($entry_form); ?>

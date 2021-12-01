@@ -1,0 +1,12 @@
+name = MCC Entity Types
+core = 7.x
+package = Features
+dependencies[] = eck
+dependencies[] = features
+features[eck_entity_type][] = mcc_personal_report
+features[eck_entity_type][] = mcc_personal_report_monthly
+features[eck_entity_type][] = mcc_section_report_monthly
+features[eck_entity_type][] = mcc_unit_report_monthly
+features[eck_entity_type][] = mcc_unit_sub_unit_activity
+features[features_api][] = api:2
+features_exclude[dependencies][eck] = eck

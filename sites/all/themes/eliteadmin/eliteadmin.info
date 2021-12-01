@@ -1,0 +1,93 @@
+
+name = eliteadmin
+description = Elite CRM Admin Template - CRM admin dashboard web app kit
+package = Core
+version = 7.0.1
+core = 7.x
+
+stylesheets[all][] = bootstrap/dist/css/bootstrap.min.css
+stylesheets[all][] = plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css
+stylesheets[all][] = plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css
+; stylesheets[all][] = plugins/bower_components/morrisjs/morris.css
+stylesheets[all][] = plugins/bower_components/owl.carousel/owl.carousel.min.css
+stylesheets[all][] = plugins/bower_components/owl.carousel/owl.theme.default.css
+stylesheets[all][] = css/animate.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/colors/blue.css
+stylesheets[all][] = css/colors/blue-dark.css
+stylesheets[all][] = css/colors/default.css
+stylesheets[all][] = css/colors/default-dark.css
+stylesheets[all][] = css/colors/gray.css
+stylesheets[all][] = css/colors/gray-dark.css
+stylesheets[all][] = css/colors/green.css
+stylesheets[all][] = css/colors/green-dark.css
+stylesheets[all][] = css/colors/megna.css
+stylesheets[all][] = css/colors/megna-dark.css
+stylesheets[all][] = css/colors/purple.css
+stylesheets[all][] = css/colors/purple-dark.css
+stylesheets[all][] = css/custom.css
+; MFP css
+;stylesheets[all][] = css/magnific-popup.css
+
+; Bootstrap Core JavaScript
+scripts[] = bootstrap/dist/js/tether.min.js
+scripts[] = bootstrap/dist/js/bootstrap.min.js
+scripts[] = plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js
+
+; Menu Plugin JavaScript
+scripts[] = plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js
+
+; slimscroll JavaScript
+scripts[] = js/jquery.slimscroll.js
+
+; Morris JavaScript
+; scripts[] = plugins/bower_components/raphael/raphael-min.js
+; scripts[] = plugins/bower_components/morrisjs/morris.js
+
+; Sparkline chart JavaScript
+scripts[] = plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js
+
+; jQuery peity
+scripts[] = plugins/bower_components/peity/jquery.peity.min.js
+scripts[] = plugins/bower_components/peity/jquery.peity.init.js
+
+; OWL Carousel
+scripts[] = plugins/bower_components/owl.carousel/owl.carousel.min.js
+scripts[] = plugins/bower_components/owl.carousel/owl.custom.js
+
+; Wave Effects
+scripts[] = js/waves.js
+
+; Custom Theme JavaScript
+scripts[] = js/custom.js
+; scripts[] = js/dashboard1.js
+
+; Style Switcher
+scripts[] = plugins/bower_components/styleswitcher/jQuery.style.switcher.js
+
+; MFP 
+; scripts[] = js/jquery.magnific-popup.min.js
+
+regions[header] = Header
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[footer] = Footer
+
+settings[shortcut_module_link] = 0
+

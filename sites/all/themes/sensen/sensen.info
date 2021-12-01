@@ -1,0 +1,135 @@
+;Theme info
+name = Sensen
+description = Sensen ready for use Industries, School, hospital, corporative, travel, fashion, jewellery and any business.
+package = Core
+version = VERSION
+core = 7.x
+screenshot = 'screenshot.png'
+
+; Add a style sheet
+
+stylesheets[all][] = css/widget.css
+stylesheets[all][] = css/bbpress.css
+stylesheets[all][] = css/commerce-layout.css
+stylesheets[all][] = css/commerce-smallscreen.css
+stylesheets[all][] = css/commerce.css
+
+stylesheets[all][] = css/bootstrap.css
+
+stylesheets[all][] = css/font-awesome.min.css
+stylesheets[all][] = css/flexslider.css
+stylesheets[all][] = css/bkstyle.css
+
+stylesheets[all][] = css/responsive.css
+
+stylesheets[all][] = css/jquery.fs.tipper.css
+stylesheets[all][] = css/justifiedGallery.css
+stylesheets[all][] = css/magnific-popup.css
+
+stylesheets[all][] = css/style.css
+
+
+stylesheets[all][] = css/prettyPhoto.css
+stylesheets[all][] = css/update.css
+
+
+; Add a script
+
+;scripts[] = js/jquery/jquery.js
+scripts[] = js/jquery/jquery-migrate.min.js
+scripts[] = js/comment-reply.min.js
+scripts[] = js/jquery-blockui/jquery.blockUI.min.js
+scripts[] = js/commerce.min.js
+scripts[] = js/jquery-cookie/jquery.cookie.min.js
+scripts[] = js/cart-fragments.min.js
+scripts[] = js/bootstrap.min.js
+scripts[] = js/jquery/ui/widget.min.js
+scripts[] = js/jquery/ui/core.min.js
+scripts[] = js/jquery/ui/tabs.min.js
+scripts[] = js/jquery/ui/accordion.min.js
+scripts[] = js/cookie.min.js
+scripts[] = js/imagesloaded.pkgd.min.js
+scripts[] = js/jquery.flexslider.js
+
+scripts[] = js/froogaloop2.min.js
+scripts[] = js/modernizr.js
+scripts[] = js/onviewport.js
+scripts[] = js/justifiedGallery.js
+scripts[] = js/jquery.magnific-popup.min.js
+scripts[] = js/masonry.pkgd.min.js
+scripts[] = js/module-load-post.js
+
+
+scripts[] = js/jquery.fs.tipper.js
+scripts[] = js/SmoothScroll.js
+scripts[] = js/menu.js
+
+scripts[] = js/customjs.js
+scripts[] = js/jquery.fitvids.js
+
+scripts[] = js/prettyPhoto/jquery.prettyPhoto.min.js
+scripts[] = js/prettyPhoto/jquery.prettyPhoto.init.min.js
+scripts[] = js/single-product.min.js
+scripts[] = js/update.js
+
+scripts[] = js/bootbox.js
+
+;Core regions
+
+regions[top_menu] = 'Top menu'
+regions[breaking_news] = 'Breaking News'
+regions[after_top_menu] = 'After Top menu'
+regions[main_menu] = 'Main menu'
+regions[footer_menu] = 'Footer menu'
+regions[search]   =  'Search'
+regions[header] = 'Header'
+regions[header_advertise] = 'Header Advertise'
+
+regions[before_content_full] = 'Before Content (Full)'
+regions[before_content] = 'Before Content'
+
+regions[content_top_left] = 'Content Top Left'
+regions[content_top_right] = 'Content Top Right'
+
+regions[content] = 'Main Content'
+regions[section] = 'Section'
+
+regions[content_bottom_left] = 'Content Bottom Left'
+regions[content_bottom_right] = 'Content Bottom Right'
+
+regions[after_content] = 'After Content'
+regions[after_content_full] = 'After Content (Full)'
+
+regions[shopping_cart] = 'Shopping cart'
+;regions[blog_small_image] = 'Blog small image'
+
+regions[sidebar_left] = 'Sidebar Left'
+regions[sidebar] = 'Sidebar'
+regions[sidebar_right] = 'Sidebar Right'
+
+;regions[related_portfolio] = 'Related portfolio'
+
+regions[footer_first] = 'Footer first'
+regions[footer_second] = 'Footer second'
+regions[footer_third] = 'Footer third'
+
+;Features (core settings)
+features[] = 'logo'
+features[] = 'name'
+features[] = 'slogan'
+;features[] = 'node_user_picture'
+;features[] = 'comment_user_picture'
+;features[] = 'comment_user_verification'
+;features[] = 'favicon'
+;features[] = 'go_to_top_button'
+;features[] = 'secondary_menu'
+
+;Breadcrumb
+settings[breadcrumb_display] = 'yes'
+settings[breadcrumb_separator] = ' &#187; '
+settings[breadcrumb_home] = 1
+
+
+version = "7.x"
+project = ""
+datestamp = "1365027012"

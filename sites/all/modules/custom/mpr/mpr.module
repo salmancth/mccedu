@@ -1,0 +1,312 @@
+<?php
+
+// 50 items per page.
+define('TOTAL_ITEMS_PER_PAGE', 50);
+// Admin uri links.
+define('ADMIN_CONTENT_MPR_MANAGE_URI', 'admin/content/mpr/manage/');
+define('ADMIN_CONTENT_MPR_URI', 'admin/content/mpr');
+
+/**
+ * Implements hook_entity_info().
+ */
+function mpr_entity_info() {
+  $mpr_entity_info['mcc_personal_report'] = array(
+    'label' => t('MCC Personal Report'),
+    'label callback' => 'mpr_label_callback',
+    'entity class' => 'Mpr',
+    'controller class' => 'MprController',
+    'base table' => 'mcc_personal_report',
+    'uri callback' => 'mpr_uri',
+    'fieldable' => TRUE,
+    'entity keys' => array(
+      'id' => 'id',
+    ),
+    'uri callback' => 'entity_class_uri',
+    'load hook' => 'mpr_load',
+    'static cache' => TRUE,
+    'admin ui' => array(
+      'path' => 'admin/content/mpr',
+      'controller class' => 'MprUIController',
+    ),
+    'module' => 'mpr',
+    'access callback' => 'mpr_access_callback',
+    'bundles' => array(
+      'mpr' => array(
+        'label' => 'MCC Personal Reports',
+        'admin' => array(
+          'path' => 'admin/structure/mpr/manage',
+          'access arguments' => array('administer mpr'),
+        ),
+      ),
+    ),
+    'views controller class' => 'EntityDefaultViewsController',
+  );
+
+  return $mpr_entity_info;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function mpr_menu() {
+  $items = array();
+
+  $items['mpr/%mpr'] = array(
+    'title' => 'Personal Reports',
+    'page callback' => 'mpr_view_entity',
+    'page arguments' => array(1),
+    'access callback' => 'mpr_access_menu_callback',
+    'access arguments' => array('view', 1),
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function mpr_permission() {
+  return array(
+    'administer mpr entities' => array(
+      'title' => t('Administer Personal Report Entities'),
+      'description' => t('Allows a user to administer mpr entities'),
+    ),
+    'view mpr entities' => array(
+      'title' => t('View Personal Report Entity'),
+      'description' => t('Allows a user to view the mpr entities.'),
+    ),
+    'create mpr entities' => array(
+      'title' => t('Create Personal Report Entities'),
+      'description' => t('Allows a user to create mpr entities.'),
+    ),
+    'edit mpr entities' => array(
+      'title' => t('Edit Personal Report Entities'),
+      'description' => t('Allows a user to edit mpr entities.'),
+    ),
+    'delete mpr entities' => array(
+      'title' => t('Delete Personal Report Entities'),
+      'description' => t('Allows a user to delete Personal Report entities.'),
+    ),
+  );
+}
+
+/**
+ * Check access permission for Used Entity UI.
+ */
+function mpr_access_menu_callback($op, $mpr = NULL, $account = NULL) {
+  switch ($op) {
+    case 'view':
+      return user_access('view Personal Report entities', $account);
+
+    case 'create':
+      return user_access('create Personal Report entities', $account);
+
+    case 'update':
+      return user_access('edit Personal Report entities', $account);
+
+    case 'delete':
+      return user_access('delete Personal Report entities', $account);
+  }
+
+  return FALSE;
+}
+
+/**
+ * Used access callback.
+ */
+function mpr_access_callback() {
+  if (user_is_anonymous() && !user_access('administer mpr entities')) {
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function mpr_theme() {
+  return array(
+    'mpr_full' => array(
+      'variables' => array('mpr' => NULL),
+      'file' => 'mpr.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Helper function for custom queries.
+ */
+function mpr_entity_query($conditions = array()) {
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'mcc_personal_report');
+
+  // Apply conditions.
+  foreach ($conditions as $key => $value) {
+    $query->propertyCondition($key, $value);
+  }
+
+  $result = $query->execute();
+
+  if (isset($result['mcc_personal_report'])) {
+    $mpr = array_keys($result['mcc_personal_report']);
+  }
+  else {
+    $mpr = array();
+  }
+
+  return $mpr;
+}
+
+/**
+ * Label callback for used entities, for menu router, etc.
+ */
+function mpr_label_callback($mpr, $type) {
+  return empty($mpr->quran_daily) ? 'Untitled report' : $mpr->quran_daily;
+}
+
+/**
+ * Saves Used to database.
+ */
+function mpr_save(mpr $mpr) {
+  return $mpr->save();
+}
+
+/**
+ * View for /used/ page.
+ */
+function mpr_view_entity($mpr) {
+  drupal_set_title($mpr->quran_daily);
+  // Path not entity.
+  $mpr_output = theme('mpr_full', array('mpr' => $mpr));
+  return $mpr_output;
+}
+
+/**
+ * used custom entity class.
+ */
+class Mpr extends Entity {
+  /**
+   * Override defaultUri().
+   */
+  protected function defaultUri() {
+    return array('path' => 'mpr/' . $this->identifier());
+  }
+}
+
+/**
+ * Menu autoloader for /used.
+ */
+function mpr_load($mpr_id, $reset = FALSE) {
+  $mpr = mpr_load_multiple(array($mpr_id), array(), $reset);
+  return reset($mpr);
+}
+
+
+/**
+ * Load multiple used based on certain conditions.
+ */
+function mpr_load_multiple($mpr_ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('mcc_personal_report', $mpr_ids, $conditions, $reset);
+}
+
+
+/**
+ * Deletes a used.
+ */
+function mpr_delete(mpr $mpr) {
+  $mpr->delete();
+}
+
+/**
+ * Delete multiple used.
+ */
+function mpr_delete_multiple(array $mpr_ids) {
+  entity_get_controller('mcc_personal_report')->delete($mpr_ids);
+}
+
+/**
+ * Custom controller for the used entity.
+ */
+class MprController extends EntityAPIController {
+
+  /**
+   * Override the save method.
+   */
+  public function save($entity, DatabaseTransaction $transaction = NULL) {
+    if (isset($entity->is_new)) {
+      $entity->created = REQUEST_TIME;
+    }
+    return parent::save($entity, $transaction);
+  }
+}
+
+/**
+ * Custom controller for the administrator UI.
+ */
+class MprUIController extends EntityDefaultUIController {
+
+  /**
+   * Override the menu hook for default ui controller.
+   */
+  public function hook_menu() {
+    $items = parent::hook_menu();
+    $items[$this->path]['title'] = t('Personal Report');
+    $items[$this->path]['description'] = t('Manage MPR, including fields.');
+    $items[$this->path]['access callback'] = 'mpr_access_callback';
+    $items[$this->path]['access arguments'] = array('administer mpr entities');
+    $items[$this->path]['type'] = MENU_LOCAL_TASK;
+    return $items;
+  }
+
+}
+
+
+function mpr_form($form, &$form_state, $mpr = NULL) {
+  $form = array();
+
+  $form['quran_daily'] = array(
+    '#title' => t('Quran'),
+    '#type' => 'textfield',
+    '#default_value' => isset($mpr->quran_daily) ? $mpr->quran_daily : '',
+    '#maxlength' => 1,
+  );
+
+  $form['hadith_daily'] = array(
+    '#title' => t('Hadith'),
+    '#type' => 'textfield',
+    '#default_value' => isset($mpr->hadith_daily) ? $mpr->hadith_daily : '',
+    '#maxlength' => 255,
+  );
+
+
+  field_attach_form('mpr', $mpr, $form, $form_state);
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => isset($used->used_id) ? t('Update Used') : t('Save Used'),
+    ),
+    'delete_link' => array(
+      '#markup' => isset($used->used_id) ? l(t('Delete'), 'admin/content/used/manage/' . $used->used_id . '/delete', array('attributes' => array('id' => array('used-delete-' . $used->used_id), 'class' => array('button remove')), 'query' => array('destination' => 'admin/content/used'))) : ''));
+  return $form;
+}
+
+/**
+ * Implements hook_form_validate().
+ */
+function mpr_form_validate($form, &$form_state) {
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function mpr_form_submit($form, &$form_state) {
+  $mpr = entity_ui_form_submit_build_entity($form, $form_state);
+  $mpr->save();
+  drupal_set_message(t('Record saved!'));
+  $form_state['redirect'] = 'mpr/' . $mpr->id;
+}

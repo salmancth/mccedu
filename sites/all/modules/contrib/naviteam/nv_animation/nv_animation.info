@@ -1,0 +1,8 @@
+name = NV Block Animation
+description = "Providers animation effect when blocks appears."
+core = 7.x
+package = NaviTeam Drupal
+
+dependencies[] = libraries
+dependencies[] = block
+dependencies[] = media

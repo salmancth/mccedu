@@ -1,0 +1,22 @@
+name = Node Review
+description = "Add reviews to arbitrary node types."
+
+core = 7.x
+project = "nodereview"
+package = Voting
+
+dependencies[] = votingapi
+dependencies[] = views
+
+configure = admin/config/content/nodereview/types
+
+files[] = views/nodereview.views.inc
+files[] = views/nodereview.views_default.inc
+files[] = views/nodereview_count_reviews_views_handler_field.inc
+files[] = nodereview.tokens.inc
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "nodereview"
+datestamp = "1380593659"
+

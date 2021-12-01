@@ -1,0 +1,6 @@
+name = MCC Personal Report
+description = "MCC Personal Report"
+core = 7.x
+package = Mcc
+
+dependencies[] = entity

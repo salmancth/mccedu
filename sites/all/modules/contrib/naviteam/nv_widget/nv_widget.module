@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * Implementation of hook_block_info()
+ */
+function nv_widget_block_info() {
+    $blocks['nv_widget_flickr'] = array(
+        'info' => t('[NaviTeam] Flickr Widget'),
+        'cache' => DRUPAL_NO_CACHE,
+    );
+	$blocks['nv_widget_twitter'] = array(
+        'info' => t('[NaviTeam] Twitter Widget'),
+        'cache' => DRUPAL_NO_CACHE,
+    );
+	
+    return $blocks;
+}
+function nv_widget_preprocess_block(&$vars) {
+  drupal_add_css(drupal_get_path('module','nv_widget').'/css/flickr.css');
+  drupal_add_css(drupal_get_path('module','nv_widget').'/css/twitter.css');
+}
+/**
+ * Implementation of hook_block_view()
+ */
+function nv_widget_block_view($delta = '') {
+	$block = array();
+	
+	switch ($delta) {
+		case 'nv_widget_flickr': //Flickr widget
+			$block['subject'] = nv_widget_block_get_title($delta);
+			$block['content'] = array(
+				'#theme' => 'nv_widget_flickr',
+				'#settings' => array(
+					'nv_widget_flickr_id' => variable_get('nv_widget_flickr_id', '135208728@N08'),
+					'nv_widget_flickr_photo_count' => variable_get('nv_widget_flickr_photo_count', 8),
+				),
+			);
+            break;
+		case 'nv_widget_twitter': //Twitter widget
+            $block['title'] = nv_widget_block_get_title($delta);
+            $block['content'] = array(
+                '#theme' => 'nv_widget_twitter',
+                '#settings' => array(
+                    'nv_widget_twitter_username' => variable_get('nv_widget_twitter_username', 'navisystemteam'),
+                    'nv_widget_twitter_tweets_count' => variable_get('nv_widget_twitter_tweets_count', 2),//edit
+                ),
+            );
+            break;
+		
+		
+    }
+	
+   
+    return $block;
+}
+/**
+ * Implementation of hook_block_configure()
+ */
+function nv_widget_block_configure($delta = '') {
+    $form = array();
+	
+	switch ($delta) {
+		
+		case 'nv_widget_flickr':
+            $form['nv_widget_flickr_id'] = array(
+				'#type' => 'textfield',
+				'#title' => t('Your flickr ID'),
+				'#default_value' => variable_get('nv_widget_flickr_id', '135208728@N08'),
+				'#description' => t('Eg: 135208728@N08')
+			);
+		
+			$form['nv_widget_flickr_photo_count'] = array(
+				'#type' => 'select',
+				'#title' => t('Number of recent photos items to display'),
+				'#default_value' => variable_get('nv_widget_flickr_photo_count', 8),
+				'#options' => drupal_map_assoc(array(1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30)),
+			);
+            break;
+		case 'nv_widget_twitter':
+            $form['nv_widget_twitter_username'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Your twitter username'),
+                '#default_value' => variable_get('nv_widget_twitter_username', 'navisystemteam'),
+                '#description' => t('Eg: navisystemteam')
+            );
+
+            $form['nv_widget_twitter_tweets_count'] = array(
+                '#type' => 'select',
+                '#title' => t('Number of recent tweets items to display'),
+                '#default_value' => variable_get('nv_widget_twitter_tweets_count', 1),
+                '#options' => drupal_map_assoc(array(1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30)),
+            );
+            break;
+		
+    }
+	
+	
+	
+    return $form;
+}
+
+/**
+ * Implementation of hook_block_save()
+ */
+function nv_widget_block_save($delta = '', $edit = array()) {
+	switch ($delta) {
+		case 'nv_widget_twitter':
+            variable_set('nv_widget_twitter_username', $edit['nv_widget_twitter_username']);
+            variable_set('nv_widget_twitter_tweets_count', $edit['nv_widget_twitter_tweets_count']);
+            break;
+		case 'nv_widget_flickr':
+            variable_set('nv_widget_flickr_id', $edit['nv_widget_flickr_id']);
+			variable_set('nv_widget_flickr_photo_count', $edit['nv_widget_flickr_photo_count']);
+            break;
+		
+    }
+}
+
+/**
+ * Implementation of hook_theme()
+ * 
+ */
+function nv_widget_theme($existing, $type, $theme, $path) {
+	return array(
+		 'nv_widget_flickr' => array(
+            'variables' => array('settings' => array('nv_widget_flickr_id' => NULL, 'nv_widget_flickr_photo_count' => NULL)),
+            'template' => 'nv_widget_flickr'
+        ),
+		 'nv_widget_twitter' => array(
+            'variables' => array('settings' => array('nv_widget_twitter_username' => NULL, 'nv_widget_twitter_tweets_count' => NULL)),
+            'template' => 'nv_widget_twitter'
+        ),
+		
+		
+    );
+}
+function nv_widget_block_get_title($delta) {
+  $block = db_query('SELECT title FROM {block} WHERE delta = :delta', array(':delta' => $delta))->fetchObject();
+  return $block->title ? $block->title : '';
+}
